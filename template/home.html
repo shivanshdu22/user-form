@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+</head>
+<body bgcolor="#F7CAC9">
+
+<H1><center>User Form</center></h1>
+ <script type="text/javascript">
+    var minAge = 18;
+        function calcAge() {
+            var date = new Date(document.getElementById("date").value);
+            var today = new Date();
+
+            var timeDiff = Math.abs(today.getTime() - date.getTime());
+            var age1 = Math.ceil(timeDiff / (1000 * 3600 * 24)) / 365;
+            return age1;
+        }
+        function setAge() {
+
+            var age = calcAge();
+            //alert("my age is " + age);
+            if (age < minAge) {
+                alert("You are not allowed into the site. The minimum age is 18!");
+            }
+
+        }
+    </script>
+<form name="frm1" method="post" action="submit">
+    {% csrf_token %}
+
+  <center>Name: <input type="text" name="name" required></center><br>
+  <center>Date of Birth:  <input type="date" name="DOB" id="date"required></center><br>
+  <center>Email id: <input type="email" name="email_id" required placeholder="Enter a valid email address"></center><br>
+  <center>Phone No.:  <input type="tel" name="phone" required></center>
+  <br><br>
+  <center><input type="submit" value="Submit" onClick="setAge();"></center>
+</form>
+</body>
+</html>
